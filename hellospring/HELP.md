@@ -1,4 +1,7 @@
 # 섹션3. 오브젝트와 의존관계
+## 관계 설정 책임의 분리 
+- 관계 설정 책임을 PaymentService가 아닌 Client로 옮기는 작업
+  - 이를 위해, PaymentService의 생성자로 객체를 받았다 (생성자 주입)
 ## 인터페이스 도입
 - XXXProvider가 ExRateProvider(interface) 를 구현하도록 하자
 - 한계
