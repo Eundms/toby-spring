@@ -1,4 +1,11 @@
 # 섹션3. 오브젝트와 의존관계
+## 오브젝트 팩토리
+- `Client 관심사 분리` : 두개의 관심사를 가진 클래스가 되었다 
+  - 1) PaymentService 이용하는 클라이언트 대표 ex Controller, API handler 역할
+  - 2) PaymentService 와 ExRateProvider 둘의 의존관계 설정 책임
+- 이를 해결하기 위해, PaymentService와 ExRateProvider의 의존관계를 설정하고 오브젝트를 만드는 책임을 가지는 ObjectFactory 클래스를 만든다
+- 
+
 ## 관계 설정 책임의 분리 
 - 관계 설정 책임을 PaymentService가 아닌 Client로 옮기는 작업
   - 이를 위해, PaymentService의 생성자로 객체를 받았다 (생성자 주입)
