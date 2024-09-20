@@ -1,5 +1,8 @@
 # 섹션3. 오브젝트와 의존관계
-## 
+## 클래스의 분리
+- SimpleExRateProvider, WebApiExRateProvider로 상속 제거 
+- WebApiExRateProvider가 여러번 생성되지 않게 하기 : 생성자에서 new함
+- 문제) 메소드 이름이 다 다르면 xxPriovider를 변경할 때 마다 메소드 를 다 변경해야 하는 문제가 생김
 
 ## 상속을 통한 확장
 - 목표 : 환율 정보를 가져오는 함수를 PaymentService 클래스에서 분리하기 => (getExRate) 를 내마음대로 커스텀해서 쓰고 싶음!
