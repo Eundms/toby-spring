@@ -1,8 +1,16 @@
 # 섹션3. 오브젝트와 의존관계
+## 인터페이스 도입
+- XXXProvider가 ExRateProvider(interface) 를 구현하도록 하자
+- 한계
+  - 1) PaymentService 가 변경됨 (생성자에 new XXProvider()이렇게 관계 설정이 되어있다)
+  - 코드레벨 의존관계, 런타임 의존관계은 다름 
+    - 관계 설정 책임에 따라 코드레벨 의존관계도 달라진다
+    - 즉, 관계 설정 책임을 PaymentService가 아닌 Client로 옮기는 작업을 진행함으로써, 의존관계를 없애자
+
 ## 클래스의 분리
 - SimpleExRateProvider, WebApiExRateProvider로 상속 제거 
 - WebApiExRateProvider가 여러번 생성되지 않게 하기 : 생성자에서 new함
-- 문제) 메소드 이름이 다 다르면 xxPriovider를 변경할 때 마다 메소드 를 다 변경해야 하는 문제가 생김
+- 문제) 메소드 이름이 다 다르면 xxPriovider를 변경할 때 마다 메소드(getSimple, getExRate)를 다 변경해야 하는 문제가 생김
 
 ## 상속을 통한 확장
 - 목표 : 환율 정보를 가져오는 함수를 PaymentService 클래스에서 분리하기 => (getExRate) 를 내마음대로 커스텀해서 쓰고 싶음!
