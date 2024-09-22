@@ -1,4 +1,13 @@
 # 섹션3. 오브젝트와 의존관계
+## 싱글톤 레지스트리 : 스프링 빈 오브젝트는 단 한 개
+- 단 하나의 객체만 존재하도록, public static 메소드 -> 전역적인 접근 일어남
+```java
+   PaymentService paymentService = beanFactory.getBean(PaymentService.class);
+   PaymentService paymentService2 = beanFactory.getBean(PaymentService.class);
+   System.out.println(paymentService2 == paymentService); // true
+```
+- `프록시` 기술 이용함 
+
 ## 구성 정보를 가져오는 다른 방법 : 컴포넌트 스캔
 - 1) 어떤 클래스 이용해서 빈을 만들것인가?
 - 2) 의존하는 클래스는?
