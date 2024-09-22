@@ -1,4 +1,12 @@
 # 섹션3. 오브젝트와 의존관계
+## 구성 정보를 가져오는 다른 방법 : 컴포넌트 스캔
+- 1) 어떤 클래스 이용해서 빈을 만들것인가?
+- 2) 의존하는 클래스는?
+=> 두가지 정보를 표현한다면 @Configuration 가 붙은 ObjectFactory가 없어도 됨
+먼저, @Component : 프로그래밍이 실행되는 시점에 메타 프로그래밍 기법을 통해 스프링 빈 팩토리가 해당 에너테이션 정보를 데이터처럼 읽어올 수 있음
+1. @Component를 빈이 필요한 클래스에 단다
+2. @Configuration이 필요한 정보를 Scan하도록 진입점(@ComponentScan)을 지정한다 
+
 ## 스프링 컨테이너와 의존관계 주입
 - 스프링 컨테이너 : IoC, DI 지원
 - BeanFactory : application 구성하는 핵심클래스의 object를 가지고 있는 것 (우리가 만든 ObjectFactory가 BeanFactory 참고할 수 있게 함)

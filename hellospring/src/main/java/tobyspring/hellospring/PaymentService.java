@@ -3,6 +3,10 @@ package tobyspring.hellospring;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
+@Component
 public class PaymentService {
     private final ExRateProvider exRateProvider;
 
