@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import tobyspring.hellospring.payment.ExRateProvider;
+
 public class CachedExRateProvider implements ExRateProvider {
 	private final ExRateProvider target;
 	private BigDecimal cachedExRate;

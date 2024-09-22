@@ -9,6 +9,10 @@
   - 상위 모듈이 하위 모듈에 의존하게 되면, Mechanism Layer의 모듈이 변경된게 상위 모듈에 영향을 미칠 수 있음
   - PaymentService -> ExRateProvider <= WebApiExRateProvider 형태로는 상위가 하위에 의존하고 있어서 만족하지 않음
     - 이를 해결하기 위해 인터페이스 소유권의 역전이 필요하다 (`Separated Interface 패턴`)
+      - 인터페이스는 자기를 구현하는 쪽 모듈이 아니라 사용하는 쪽(client)에 있는게 자연스러울 수 있음
+        - Policy Layer : PaymentService -> ExRateProvider
+        - Mechanism Layer : WebApiRateProvider
+        
 ## DI와 디자인패턴 (1)
 - 디자인패턴 분류 
   - 1. Purpose : 패턴 목적

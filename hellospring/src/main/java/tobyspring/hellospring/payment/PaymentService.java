@@ -3,8 +3,6 @@ package tobyspring.hellospring.payment;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import tobyspring.hellospring.exrate.ExRateProvider;
-
 public class PaymentService {
     private final ExRateProvider exRateProvider;
 

@@ -3,6 +3,8 @@ package tobyspring.hellospring.exrate;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+import tobyspring.hellospring.payment.ExRateProvider;
+
 public class SimpleExRateProvider implements ExRateProvider {
     @Override
     public BigDecimal getExRate(String currency) throws IOException {
