@@ -1,10 +1,49 @@
 # 섹션3. 오브젝트와 의존관계
+## 스프링 컨테이너와 의존관계 주입
+- 스프링 컨테이너 : IoC, DI 지원
+- BeanFactory : application 구성하는 핵심클래스의 object를 가지고 있는 것 (우리가 만든 ObjectFactory가 BeanFactory 참고할 수 있게 함)
+  - 1) Bean 클래스 : PaymentService, WebApiExRateProvider
+  - 2) 의존 관계 : PaymentService 가 다양한 ExRateProvider 중에 WebApiExRateProvider를 사용함
+  - 두가지 `구성 정보`를 가지고 있음
+- 구현
+  - AnnotationConfigApplicationContext에 @Configuration 이 붙은 ObjectFactory 를 넘긴다
+  - getBean(클래스이름)하여 빈을 가져온다
+- BeanFactory == `스프링 IoC/DI 컨테이너`
+  - 왜 `제어권 역전(IoC)`, `의존 관계 주입(DI)`인가? 
+    - `IoC` : PaymentService가 가지고 있던 제어권 (`어떤 오브젝트를 의존해서 사용할꺼야 라는 설정 책임`)을 BeanFactory가 대신해주기 때문
+    - `DI` : PaymentService입장에서 WebApiExiRateProvider가 Dependency인데, 해당 Dependency를 생성자를 통해 PaymentService에 전달해줌
+  - `컨테이너` : BeanFactory 처음만들어질 때 내부에 이미 필요한 객체를 만들어놨기 때문에, getBean을 통해 객체를 반환받을 수 있음
+    - 왜 미리 만들어서 가지고 있는가?
+      - 서버 애플리케이션에 많은 요청이 들어올 때마다 PaymentService를 new로 새로 생성하게 되면 부하가 많이 걸린다 
+      - 상태 필드에 WebApiExRateProvider 정보를 가지고 있지 않기 떄문에 동시에 여러 스레드가 사용해도 괜찮다
+      - 따라서, 미리 만들어두고 리턴함
+      - 서블릿 컨테이너도 오브젝트를 미리 만들어두고 사용함
+
+## 객체지향 설계 원칙과 디자인 패턴
+- 관심사의 분리 
+- 개방 폐쇄 원칙(Open-Closed Principle) : 확장에는 열려있고 변경에는 닫혀있어야 한다
+  - 클래스의 기능을 확장할 때, 코드는 변경되면 안된다
+  - PaymentService는 환율정보를 가져오는 방식을 확장할 수 있음. 하지만, 코드의 변경은 일어나지 않음. => `전략패턴`에 잘 적용되어 있음
+- 높은 응집도와 낮은 결합도(High Coherence and low coupling) 
+  - 하나의 모듈이 하나의 책임, 관심사에 집중되어 있다
+  - 응집도가 높으면 변화가 일어날 떄 비용이 낮아짐
+  - 응집도가 낮으면 코드 영향도에 대해 검증을 해야 함 
+- 전략패턴
+  - 자신의 기능 맥락(Context)에서 필요에 따라 변경이 필요한 알고리즘을 인터페이스를 통해 통째로 외부로 분리시키고, 이를 구현한 구체적인 알고리즘 클래스를 필요에 따라 바꿔서 사용할 수 있게 하는 디자인 패턴
+    - interface 두고 위 아래의 데이터 두기 
+  - java : sort
+  ```java
+    List<String> scores = Arrays.asList("a", "b", "c");
+    Collections.sort(scores, (o1,o2)-> o1.length() - o2.length());
+  ```
+- 제어의 역전 
+  - 제어권 이전을 통한 제어 관계 역전 - 프레임워크의 기본 동작 원리
+
 ## 오브젝트 팩토리
 - `Client 관심사 분리` : 두개의 관심사를 가진 클래스가 되었다 
   - 1) PaymentService 이용하는 클라이언트 대표 ex Controller, API handler 역할
   - 2) PaymentService 와 ExRateProvider 둘의 의존관계 설정 책임
 - 이를 해결하기 위해, PaymentService와 ExRateProvider의 의존관계를 설정하고 오브젝트를 만드는 책임을 가지는 ObjectFactory 클래스를 만든다
-- 
 
 ## 관계 설정 책임의 분리 
 - 관계 설정 책임을 PaymentService가 아닌 Client로 옮기는 작업
