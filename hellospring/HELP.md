@@ -1,4 +1,14 @@
 # 섹션3. 오브젝트와 의존관계
+## 의존성 역전 원칙(Dependency Inversion Principle)
+- Dependency Injection으로 DIP 지킬 수 있음
+```text
+1. 상위 수준의 모듈은 하위 수준의 모듈에 의존해서는 안 된다. 둘 모두 추상화에 의존해야 한다.
+2. 추상화는 구체적인 사항에 의존해서는 안 된다. 구체적인 사항은 추상화에 의존해야 한다.
+```
+- Policy Layer(PaymentService) : 상위 모듈, Mechanism Layer(WebApiExRateProvider) : 하위 모듈
+  - 상위 모듈이 하위 모듈에 의존하게 되면, Mechanism Layer의 모듈이 변경된게 상위 모듈에 영향을 미칠 수 있음
+  - PaymentService -> ExRateProvider <= WebApiExRateProvider 형태로는 상위가 하위에 의존하고 있어서 만족하지 않음
+    - 이를 해결하기 위해 인터페이스 소유권의 역전이 필요하다 (`Separated Interface 패턴`)
 ## DI와 디자인패턴 (1)
 - 디자인패턴 분류 
   - 1. Purpose : 패턴 목적

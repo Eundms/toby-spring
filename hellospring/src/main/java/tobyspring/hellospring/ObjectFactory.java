@@ -1,8 +1,12 @@
 package tobyspring.hellospring;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+
+import tobyspring.hellospring.exrate.CachedExRateProvider;
+import tobyspring.hellospring.exrate.ExRateProvider;
+import tobyspring.hellospring.exrate.WebApiExRateProvider;
+import tobyspring.hellospring.payment.PaymentService;
 
 /**
  * 오브젝트 만들기 + 의존관계 설정하기

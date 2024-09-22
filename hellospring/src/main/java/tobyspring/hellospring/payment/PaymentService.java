@@ -1,12 +1,11 @@
-package tobyspring.hellospring;
+package tobyspring.hellospring.payment;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+import tobyspring.hellospring.exrate.ExRateProvider;
 
- public class PaymentService {
+public class PaymentService {
     private final ExRateProvider exRateProvider;
 
     public PaymentService(ExRateProvider exRateProvider) {
