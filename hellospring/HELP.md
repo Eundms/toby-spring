@@ -1,3 +1,9 @@
+# 섹션4. 테스트
+## 테스트와 DI
+- 스프링 DI를 이용하는 테스트
+  - 테스트용 협력자(Collaborator)/의존 오브젝트를 스프링의 구성 정보를 이용해서 지정하고 컨테이너로부터 테스트 대상을 가져와서 테스트
+  - `@ContextConfiguration`, `@Autowired`
+
 # 섹션3. 오브젝트와 의존관계
 ## 의존성 역전 원칙(Dependency Inversion Principle)
 - Dependency Injection으로 DIP 지킬 수 있음
