@@ -18,6 +18,11 @@ public class ApiTemplate {
 		this.exrateExtractor = new ErApiExtractor();
 	}
 
+	public ApiTemplate(SimpleApiExecutor simpleApiExecutor, ErApiExtractor erApiExtractor) {
+		this.apiExecutor = simpleApiExecutor;
+		this.exrateExtractor = erApiExtractor;
+	}
+
 	public BigDecimal getExRate(String url) {
 		return this.getExRate(url, this.apiExecutor, this.exrateExtractor);
 	}
