@@ -1,3 +1,34 @@
+
+# 섹션6. 예외
+- 예외를 복구해서 정상적인 흐름으로 전환할 수 있는가?
+  - 1. 재시도 
+  - 2. 대안
+- 버그 인가?
+  - 예외가 발생한 코드의 버그인가?
+  - 클라이언트의 버그인가? 
+- 제어할 수 없는 예외 상황인가?
+  - DB Connection , Network Connection
+- OrderRepository와 save()함수 만듦
+  - save()가 JPA를 사용하던, MyBatis를 사용하던 던져지는 예외는 같아야 함 
+### 예외를 잘못 다루는 코드
+1. 예외를 무시하는 코드 
+  => 복구 or 다시 throw 되어야 한다
+2. 무의미하고 무책임한 throws
+  => throws Exception 선언하면 계속 타고 올라가야함 
+3. Error
+  => 시스템에 비정상적인 상황이 발생, OutOfMemoryError, ThreadDeath
+
+### 체크 예외 
+- catch, throws 강요
+- 초기 라이브러리의 잘못된 예외 설계/사용
+- 복구 x -> RuntimeException이나 적절한 추상화 레벨의 예외로 전환해서 던질것
+
+### JPARepository : `애플리케이션 인프라스트럭처 빈`
+- DataSource : 빈으로 등록, 애플리케이션에 하나만 등록하면 됨
+- OrderRepository : 빈으로 등록
+- EntityManager <=생성= EntityManagerFactory(빈 등록)
+=> 스프링부트에서 .yml 읽어다가 등록됨
+
 # 섹션5. 템플릿
 - 코드 중에서 `변경이 거의 일어나지 않으며 일정한 패턴으로 유지되는 특성(템플릿)`을 가진 부분을
 `자유롭게 변경되는 성질을 가진 부분(콜백)`으로부터 독립시켜서 효과적으로 활용할 수 있도록 하는 방법
@@ -15,6 +46,11 @@
 메소드 주입 -> 의존 오브젝트가 메소드 호출 시점에 파라미터로 전달되는 방식, 의존관계 주입의 한 종류
 ## 람다로 바꿀 수 있는 것?
 구현하고 있는 인터페이스의 메소드가 하나 
+## 스프링이 제공하는 템플릿
+- RestTemplate : HTTP API 요청을 처리하는 템플릿
+  - HTTP Client 라이브러리 확장 : ClientHttpRequestFactory
+  - Message Body를 변환하는 전략 : HttpMessageConverter
+
 # 섹션4. 테스트
 ## 도메인 오브젝트 테스트
 - 도메인 로직, 비즈니스 로직을 어디에 둘 지를 결정하는 패턴
