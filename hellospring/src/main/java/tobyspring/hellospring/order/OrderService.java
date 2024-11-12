@@ -1,28 +1,12 @@
 package tobyspring.hellospring.order;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.support.TransactionTemplate;
 
-@Service
-public class OrderService {
-	private final OrderRepository jpaOrderRepository;
-	private final PlatformTransactionManager transactionManager;
+public interface OrderService {
 
-	public OrderService(OrderRepository jpaOrderRepository, PlatformTransactionManager transactionManager) {
-		this.jpaOrderRepository = jpaOrderRepository;
-		this.transactionManager = transactionManager;
-	}
+	Order createOrder(String no, BigDecimal total);
 
-	public Order createOrder(String no, BigDecimal total) {
-		Order order = new Order(no, total);
-
-		return new TransactionTemplate(transactionManager).execute(status -> {
-			this.jpaOrderRepository.save(order);
-			return order;
-		});
-	}
+	List<Order> createOrders(List<OrderReq> reqs);
 }
